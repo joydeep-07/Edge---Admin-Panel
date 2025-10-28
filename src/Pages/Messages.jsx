@@ -94,7 +94,7 @@ const Messages = () => {
                   <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 flex-1 min-w-0">
                     <div className="flex items-center gap-2 min-w-0">
                       <span className="text-gray-100 text-xs sm:text-sm md:text-base font-light whitespace-nowrap">
-                        {String(index + 1).padStart(2, "0")}•
+                        {String(index + 1).padStart(2, "0")}.
                       </span>
                       <h3 className="text-base sm:text-lg md:text-[15px] text-gray-200 font-semibold truncate">
                         {msg.name}
