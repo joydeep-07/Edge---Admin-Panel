@@ -56,7 +56,7 @@ const Messages = () => {
           </div>
 
           <SplitText
-            text="Your Messages"
+            text="Edge Messages"
             className="text-4xl sm:text-5xl lg:text-4xl font-medium text-left leading-[1.4] text-white"
             delay={100}
             duration={0.6}
