@@ -44,10 +44,10 @@ const Messages = () => {
   }
 
   return (
-    <div className="w-full min-h-screen py-25 relative overflow-hidden flex  justify-center items-start">
-      <div className="w-full max-w-7xl mx-auto flex flex-col  gap-10 px-6 items-start">
+    <div className="w-full min-h-screen pt-10 pb-25 relative overflow-hidden flex justify-center items-start">
+      <div className="w-full max-w-7xl mx-auto flex flex-col gap-10 px-4 sm:px-6 lg:px-8 items-start">
         {/* LEFT: Sticky Header */}
-        <div className=" p-4">
+        <div className="w-full p-4">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-12 h-0.5 bg-green-500"></div>
             <h2 className="text-sm font-semibold uppercase tracking-widest text-green-500">
@@ -57,7 +57,7 @@ const Messages = () => {
 
           <SplitText
             text="Your Messages"
-            className="text-5xl lg:text-4xl font-medium text-left leading-[1.4] text-white"
+            className="text-4xl sm:text-5xl lg:text-4xl font-medium text-left leading-[1.4] text-white"
             delay={100}
             duration={0.6}
             ease="power3.out"
@@ -68,46 +68,46 @@ const Messages = () => {
             rootMargin="-100px"
           />
 
-          <p className="text-gray-400 mt-5 max-w-md">
+          <p className="text-gray-400 mt-5 max-w-md text-sm sm:text-base">
             View messages submitted through the contact form. Click to expand
             each message for full details.
           </p>
         </div>
 
         {/* RIGHT: Messages Accordion */}
-        <div className="lg:w-full  flex flex-col gap-4">
+        <div className="w-full flex flex-col gap-4">
           {messages.length === 0 ? (
-            <div className="text-gray-500 italic text-lg py-10">
+            <div className="text-gray-500 italic text-base sm:text-lg py-10 text-center w-full">
               No messages found in your inbox.
             </div>
           ) : (
             messages.map((msg, index) => (
               <div
                 key={msg.id}
-                className="border border-gray-700/20 rounded-2xl bg-gray-700/15 overflow-hidden transition-all duration-400 ease-[cubic-bezier(0.4,0,0.2,1)]"
+                className="w-full border border-gray-700/20 rounded-2xl bg-gray-700/15 overflow-hidden transition-all duration-400 ease-[cubic-bezier(0.4,0,0.2,1)]"
               >
                 {/* Header */}
                 <button
                   onClick={() => toggleMessage(index)}
-                  className="w-full flex justify-between items-center p-6 text-left focus:outline-none"
+                  className="w-full flex justify-between items-center p-4 sm:p-6 text-left focus:outline-none"
                 >
-                  <div className="flex flex-col md:flex-row md:items-center gap-3">
-                    <div className="flex items-center gap-2">
-                      <span className="text-gray-100 text-sm md:text-base font-light">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 flex-1 min-w-0">
+                    <div className="flex items-center gap-2 min-w-0">
+                      <span className="text-gray-100 text-xs sm:text-sm md:text-base font-light whitespace-nowrap">
                         {String(index + 1).padStart(2, "0")}•
                       </span>
-                      <h3 className="text-lg md:text-[15px] text-gray-200 font-semibold">
+                      <h3 className="text-base sm:text-lg md:text-[15px] text-gray-200 font-semibold truncate">
                         {msg.name}
                       </h3>
                     </div>
-                    <p className="text-sm text-green-400/80 md:ml-3">
+                    <p className="text-xs sm:text-sm text-green-400/80 sm:ml-3 truncate">
                       {msg.email}
                     </p>
                   </div>
                   {openIndex === index ? (
-                    <IoChevronUp className="text-gray-100 text-sm transition-transform duration-400 ease-[cubic-bezier(0.4,0,0.2,1)]" />
+                    <IoChevronUp className="text-gray-100 text-sm flex-shrink-0 ml-2 transition-transform duration-400 ease-[cubic-bezier(0.4,0,0.2,1)]" />
                   ) : (
-                    <IoChevronUp className="text-gray-500 rotate-180 text-sm transition-transform duration-400 ease-[cubic-bezier(0.4,0,0.2,1)]" />
+                    <IoChevronUp className="text-gray-500 rotate-180 text-sm flex-shrink-0 ml-2 transition-transform duration-400 ease-[cubic-bezier(0.4,0,0.2,1)]" />
                   )}
                 </button>
 
@@ -120,11 +120,11 @@ const Messages = () => {
                   }`}
                   style={{ willChange: "transform, opacity, max-height" }}
                 >
-                  <div className="p-6 pt-0">
-                    <p className="text-gray-400 text-[15px] leading-relaxed">
+                  <div className="p-4 sm:p-6 pt-0">
+                    <p className="text-gray-400 text-sm sm:text-[15px] leading-relaxed break-words">
                       {msg.message}
                     </p>
-                    <p className="text-gray-500 text-sm mt-4">
+                    <p className="text-gray-500 text-xs sm:text-sm mt-4">
                       Sent on:{" "}
                       {new Date(msg.created_at).toLocaleDateString("en-US", {
                         month: "short",
