@@ -125,7 +125,6 @@ const Messages = () => {
                       {msg.message}
                     </p>
                     <p className="text-gray-500 text-xs sm:text-sm mt-4">
-                      Sent on:{" "}
                       {new Date(msg.created_at).toLocaleDateString("en-US", {
                         month: "short",
                         day: "numeric",
