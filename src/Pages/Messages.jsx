@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { supabase } from "../SupabaseClient";
 import SplitText from "../../Reactbits/SplitText/SplitText";
 import { IoChevronUp } from "react-icons/io5";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Messages = () => {
   const [messages, setMessages] = useState([]);
@@ -84,7 +85,7 @@ const Messages = () => {
             messages.map((msg, index) => (
               <div
                 key={msg.id}
-                className="w-full border border-gray-700/20 rounded-2xl bg-gray-700/15 overflow-hidden transition-all duration-400 ease-[cubic-bezier(0.4,0,0.2,1)]"
+                className="w-full border border-gray-700/20 rounded-2xl bg-gray-700/15 overflow-hidden"
               >
                 {/* Header */}
                 <button
@@ -104,35 +105,58 @@ const Messages = () => {
                       {msg.email}
                     </p>
                   </div>
-                  {openIndex === index ? (
-                    <IoChevronUp className="text-gray-100 text-sm flex-shrink-0 ml-2 transition-transform duration-400 ease-[cubic-bezier(0.4,0,0.2,1)]" />
-                  ) : (
-                    <IoChevronUp className="text-gray-500 rotate-180 text-sm flex-shrink-0 ml-2 transition-transform duration-400 ease-[cubic-bezier(0.4,0,0.2,1)]" />
-                  )}
+
+                  <IoChevronUp
+                    className={`text-sm flex-shrink-0 ml-2 transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+                      openIndex === index
+                        ? "rotate-0 text-gray-100"
+                        : "rotate-180 text-gray-500"
+                    }`}
+                  />
                 </button>
 
-                {/* Body */}
-                <div
-                  className={`overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] ${
-                    openIndex === index
-                      ? "max-h-[9999px] opacity-100 translate-y-0"
-                      : "max-h-0 opacity-0 -translate-y-2"
-                  }`}
-                  style={{ willChange: "transform, opacity, max-height" }}
-                >
-                  <div className="p-4 sm:p-6 pt-0">
-                    <p className="text-gray-400 text-sm sm:text-[15px] leading-relaxed break-words">
-                      {msg.message}
-                    </p>
-                    <p className="text-gray-500 text-xs sm:text-sm mt-4">
-                      {new Date(msg.created_at).toLocaleDateString("en-US", {
-                        month: "short",
-                        day: "numeric",
-                        year: "numeric",
-                      })}
-                    </p>
-                  </div>
-                </div>
+                {/* Animated Body */}
+                <AnimatePresence initial={false}>
+                  {openIndex === index && (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, height: 0, y: -10, scale: 0.98 }}
+                      animate={{
+                        opacity: 1,
+                        height: "auto",
+                        y: 0,
+                        scale: 1,
+                      }}
+                      exit={{
+                        opacity: 0,
+                        height: 0,
+                        y: -10,
+                        scale: 0.98,
+                      }}
+                      transition={{
+                        duration: 0.5,
+                        ease: [0.4, 0, 0.2, 1],
+                      }}
+                      className="overflow-hidden"
+                    >
+                      <div className="p-4 sm:p-6 pt-0">
+                        <p className="text-gray-400 text-sm sm:text-[15px] leading-relaxed break-words">
+                          {msg.message}
+                        </p>
+                        <p className="text-gray-500 text-xs sm:text-sm mt-4">
+                          {new Date(msg.created_at).toLocaleDateString(
+                            "en-US",
+                            {
+                              month: "short",
+                              day: "numeric",
+                              year: "numeric",
+                            }
+                          )}
+                        </p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             ))
           )}
