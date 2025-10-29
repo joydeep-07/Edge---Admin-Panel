@@ -113,9 +113,9 @@ const Messages = () => {
 
                 {/* Body */}
                 <div
-                  className={`overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+                  className={`overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] ${
                     openIndex === index
-                      ? "max-h-64 opacity-100 translate-y-0"
+                      ? "max-h-[9999px] opacity-100 translate-y-0"
                       : "max-h-0 opacity-0 -translate-y-2"
                   }`}
                   style={{ willChange: "transform, opacity, max-height" }}
